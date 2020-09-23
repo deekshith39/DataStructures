@@ -13,7 +13,41 @@ Node* XOR(Node* a,Node* b)
     return (Node*) ((uintptr_t) (a) ^ (uintptr_t) (b));  
 }
 
-
+void deleteB()
+{
+    if(head==NULL) cout<<"list is empty "<<endl;
+    else
+    {
+        Node* temp = head->npx;
+        temp->npx = XOR(head,temp->npx);
+        free(head);
+        head=temp;
+    }
+    
+}
+void deleteE()
+{
+    if(head==NULL) cout<<"list is empty"<<endl;
+    else
+    {
+        Node* prev=NULL;
+        Node* next;
+        Node* curr=head;
+        while(curr!=NULL)
+        {
+           // cout<<curr->data<<" ";
+            next=XOR(prev,curr->npx);
+            prev=curr;
+            curr=next;
+        }
+        Node* temp = prev->npx;
+        temp->npx = XOR(temp->npx,prev);
+        free(prev);
+        //cout<<"last pointer element is "<<curr->data;
+        
+    }
+    
+}
 
 void insertB(int data)
 {
@@ -72,6 +106,7 @@ void print()
         prev = curr;
         curr = next;
     }
+    cout<<endl;
     //prev->npx = XOR(prev->npx,temp);
 }
 
@@ -95,6 +130,13 @@ int main()
     }    
    
     cout<<"the output is "<<endl;
+    print();
+
+    cout<<"after deleting element at front : "<<endl;
+    deleteB();
+    print();
+    cout<<"after deleting element at the end : "<<endl;
+    deleteE();
     print();
 
     return 0;
