@@ -16,6 +16,7 @@ Node* XOR(Node* a,Node* b)
 void deleteB()
 {
     if(head==NULL) cout<<"list is empty "<<endl;
+    else if(head->npx==NULL) head=NULL;
     else
     {
         Node* temp = head->npx;
@@ -28,6 +29,7 @@ void deleteB()
 void deleteE()
 {
     if(head==NULL) cout<<"list is empty"<<endl;
+    else if(head->npx==NULL) head=NULL;
     else
     {
         Node* prev=NULL;
@@ -95,18 +97,22 @@ void insertE(int data)
 
 void print()
 {
-    Node* curr=head;
-    Node* next;
-    Node* prev=NULL;
-    while(curr!=NULL)
+    if(head==NULL) cout<<"empty!"<<endl;
+    else
     {
-        cout<<curr->data<<" ";
+        Node* curr=head;
+        Node* next;
+        Node* prev=NULL;
+        while(curr!=NULL)
+        {
+            cout<<curr->data<<" ";
 
-        next = XOR(prev,curr->npx);
-        prev = curr;
-        curr = next;
+            next = XOR(prev,curr->npx);
+            prev = curr;
+            curr = next;
+        }
+        cout<<endl;
     }
-    cout<<endl;
     //prev->npx = XOR(prev->npx,temp);
 }
 
