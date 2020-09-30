@@ -41,9 +41,15 @@ class SkipList{
 
 int SkipList::randomLevel() 
 { 
-    int r = 1 + rand()%max_level;
-    return r;
-}
+    float r = (float)rand()/RAND_MAX; 
+    int lvl = 0; 
+    while (r < 0.5 && lvl < max_level) 
+    { 
+        lvl++; 
+        r = (float)rand()/RAND_MAX; 
+    } 
+    return lvl; 
+}; 
 void SkipList::insert(int key) 
 { 
     Node *current = head; 
@@ -77,15 +83,15 @@ void SkipList::insert(int key)
   
         // create new node with random level generated 
         Node* n = new Node(key, rlevel); 
-
+        
         for (int i=0;i<=rlevel;i++) 
         { 
             n->forward[i] = update[i]->forward[i]; 
             update[i]->forward[i] = n; 
         } 
-        cout << "Successfully Inserted key " << key << "\n"; 
+       // cout << "Successfully Inserted key " << key << "\n"; 
     } 
-};
+}
 
 int SkipList::search(int ele)
 {
@@ -107,9 +113,8 @@ int SkipList::search(int ele)
 void SkipList::del(int ele)
 {
     Node* curr = head;
-    if(search(ele)) //if element is found deletionn can be done
-    {
-        Node* update[max_level+1];
+
+    Node* update[max_level+1];
 
         for(int i=level;i>=0;i--)
         {
@@ -145,8 +150,7 @@ void SkipList::del(int ele)
         }
 
         level = lvl;
-    }
-    else cout<<"Deletion not possible!"<<endl;
+
 }
 
 void SkipList::print()
@@ -165,33 +169,39 @@ void SkipList::print()
     }
 }
 
-
-
-
-
 int main()
 {
     SkipList lst; 
-  
-    lst.insert(3); 
-    lst.insert(6); 
-    lst.insert(7); 
-    lst.insert(9); 
-    lst.insert(12); 
-    lst.insert(19); 
-    lst.insert(17); 
-    lst.insert(26); 
-    lst.insert(21); 
-    lst.insert(25);
-
-    if(lst.search(24)) cout<<"Found element"<<endl;
-    else cout<<"Not Found!"<<endl;
-
-    lst.del(6);
-    lst.del(3);
-    lst.del(12);
-    lst.del(25);
-
+    int n;
+    cout<<"enter the number of elements "<<endl;
+    cin>>n;
+    
+    //inserting
+    for(int i=0;i<n;i++)
+    {
+        int ele;
+        cin>>ele;
+        lst.insert(ele);
+    }
+    cout<<"List contains  :"<<endl;
     lst.print();
+    cout<<endl;
+
+    //deleting
+    int element;
+    cout<<"enter the element to be deleted  :"<<endl;
+    cin>>element;
+    lst.del(element);
+    cout<<"List conatins : "<<endl;
+    lst.print();
+    cout<<endl;
+    
+    //searching
+    int item;
+    cout<<"enter the element to be searched : "<<endl;
+    cin>>item;
+    if(lst.search(item)) cout<<"FOUND!"<<endl;
+    else cout<<"NOT FOUND!"<<endl;
+    
     return 0;
 }
