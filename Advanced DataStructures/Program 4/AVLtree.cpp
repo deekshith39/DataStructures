@@ -162,7 +162,7 @@ Node* deleteEle(Node* node,int ele)
     }
     if(node == NULL) return node;
 
-    node->height = 1 + max(Height(node->left),Height(node->right));
+     node->height = 1 + max(Height(node->left),Height(node->right));
 
     int balance = Height(node->left) - Height(node->right);
 
