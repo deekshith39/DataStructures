@@ -1,2 +1,6 @@
 
 *.exe
+MyPractice/AVLTree.cpp
+MyPractice/island.cpp
+MyPractice/skipList.cpp
+MyPractice/XORLL.cpp
