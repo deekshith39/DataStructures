@@ -21,9 +21,14 @@ void printUnique(int L, int R) {
 }
 
 int main() {
-    int L, R;
-    cout << "Enter the limits : "; 
-    cin >> L >> R;
-    cout << "Output is : " << endl;
-    printUnique(L, R);
+    int t;
+    cin >> t;
+    while(t--){
+        int L, R;
+        cout << "Enter the limits : "; 
+        cin >> L >> R;
+        cout << "Output is : " << endl;
+        printUnique(L, R);
+        cout << endl;
+    }
 }
